@@ -68,6 +68,25 @@ auto mean(const C& container) {
     }
 }
 
+template <Iterable C>
+requires Addable<typename C::value_type> && Divisible<typename C::value_type>
+auto variance(const C& container) {
+    auto promedio = mean(container);
+
+    decltype(promedio) suma_diferencias = 0; // decltype declara el tipo de promedio
+    size_t cuenta = 0;
+
+    // calculamos la varianza
+    for (const auto& valor : container) { // entramos en el container
+        auto diferencia = static_cast<decltype(promedio)> (valor) - promedio;
+        // declaramos el type de promedio y lo casteamos en la resta
+        suma_diferencias += diferencia * diferencia;
+        cuenta++;
+    }
+
+    // dividimos entre la cantidad total para obtener la varianza
+    return suma_diferencias / cuenta;
+}
 
 #endif //TAREA2_CORE_NUMERIC_H
 
