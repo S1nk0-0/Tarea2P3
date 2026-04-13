@@ -88,5 +88,33 @@ auto variance(const C& container) {
     return suma_diferencias / cuenta;
 }
 
+template <Iterable C>
+requires Comparable<typename C::value_type> // necesitamos que se pueda comparar
+auto max(const C& container) {
+
+    auto max = *std::begin(container); // hacemos que el max sea el primero
+
+    for (const auto& valor : container) {
+        if (valor > max) {
+            max = valor; // si valor es mayor, se le asigna a max
+        }
+    }
+
+    return max;
+}
+
+template <Iterable C, typename F>
+auto transform_reduce(const C& container, F funcion_transformadora) {
+
+    auto suma_total; // no se como declararlo helppp
+    // Recorremos el contenedor
+    for (const auto& valor : container) {
+        // Aplicamos la función al valor y lo sumamos al total
+        suma_total = suma_total + funcion_transformadora(valor);
+    }
+
+    return suma_total;
+}
+
 #endif //TAREA2_CORE_NUMERIC_H
 
