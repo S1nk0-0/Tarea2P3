@@ -5,7 +5,7 @@
 #include <iterator>
 using namespace std;
 
-//
+// Punto 1)
 
 
 
@@ -51,6 +51,7 @@ auto sum (const C& container)
 }
 
 
+// Punto 2)
 template <Iterable C>
 requires Addable<typename C :: value_type> and Divisible <typename C :: value_type>
 auto mean(const C& container) {
@@ -68,6 +69,8 @@ auto mean(const C& container) {
     }
 }
 
+
+// Punto 3)
 template <Iterable C>
 requires Addable<typename C::value_type> && Divisible<typename C::value_type>
 auto variance(const C& container) {
@@ -88,6 +91,8 @@ auto variance(const C& container) {
     return suma_diferencias / cuenta;
 }
 
+
+// Punto 4)
 template <Iterable C>
 requires Comparable<typename C::value_type> // necesitamos que se pueda comparar
 auto max(const C& container) {
@@ -103,6 +108,8 @@ auto max(const C& container) {
     return max;
 }
 
+
+// Punto 5)
 template <Iterable C, typename F>
 auto transform_reduce(const C& container, F funcion_transformadora) {
 
